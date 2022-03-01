@@ -1,5 +1,6 @@
 const express = require("express");
 const Students = require("../models/studentmodel");
+const Registers = require("../models/Registrationmodal");
 const router = express.Router();
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -55,6 +56,20 @@ router.post("/student", async (req, res) => {
 
   await newStudent.save();
 
+  return res.status(200).json({
+    msg: "registration successful",
+  });
+});
+
+router.post("/registeration", async (req, res) => {
+  const { firstnameandlastname, Email, Pleaseselect, password } = req.body;
+  const newRegister = new Registers({
+    firstnameandlastname,
+    Email,
+    Pleaseselect,
+    password,
+  });
+  await newRegister.save();
   return res.status(200).json({
     msg: "registration successful",
   });
